@@ -12,7 +12,7 @@ export class InventoryPage {
     this.inventoryItems = page.locator('.inventory_item');
     this.cartBadge = page.locator('.shopping_cart_badge');
     this.cartLink = page.locator('.shopping_cart_link');
-    this.sortDropdown = page.locator('[data-test="product_sort_container"]');
+    this.sortDropdown = page.getByRole('combobox');
   }
 
   async addItemByIndex(index: number) {
