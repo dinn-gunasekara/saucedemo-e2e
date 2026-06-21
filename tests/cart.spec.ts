@@ -41,9 +41,12 @@ test.describe('Shopping Cart', () => {
 
   test('sort by price low to high', async () => {
     await inventoryPage.sortBy('lohi');
-    const prices = await inventoryPage.getItemPrices();
-    for (let i = 1; i < prices.length; i++) {
-      expect(prices[i]).toBeGreaterThanOrEqual(prices[i - 1]);
-    }
+
+    await expect.poll(async () => {
+      const prices = await inventoryPage.getItemPrices();
+      return prices.every((price, i) => i === 0 || price >= prices[i - 1]);
+    }, {
+      message: 'Expected prices to be sorted in ascending order',
+    }).toBe(true);
   });
 });
