@@ -1,0 +1,29 @@
+{
+  "name": "saucedemo-e2e",
+  "version": "1.0.0",
+  "description": "Automated E2E test suite for SauceDemo using Playwright",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinn-gunasekara/saucedemo-e2e.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dinn-gunasekara/saucedemo-e2e/issues"
+  },
+  "homepage": "https://github.com/dinn-gunasekara/saucedemo-e2e#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.0"
+  }
+}
+
