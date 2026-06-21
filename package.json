@@ -8,6 +8,8 @@
   },
   "scripts": {
     "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test",
     "test:headed": "playwright test --headed",
     "test:report": "playwright show-report"
   },
@@ -26,4 +28,3 @@
     "@playwright/test": "^1.61.0"
   }
 }
-
