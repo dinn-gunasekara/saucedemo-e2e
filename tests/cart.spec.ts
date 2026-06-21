@@ -42,6 +42,11 @@ test.describe('Shopping Cart', () => {
   test('sort by price low to high', async () => {
     await inventoryPage.sortBy('lohi');
 
+    // allTextContents() doesn't auto-wait, so reading immediately after
+    // triggering the sort can race the page's re-render. expect.poll()
+    // retries the whole read+check until it passes or times out — the
+    // same auto-retry principle as locator assertions, applied manually
+    // here since this check spans multiple values, not one locator.
     await expect.poll(async () => {
       const prices = await inventoryPage.getItemPrices();
       return prices.every((price, i) => i === 0 || price >= prices[i - 1]);
