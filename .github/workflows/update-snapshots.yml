@@ -1,0 +1,31 @@
+name: Update Visual Snapshots
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Regenerate snapshots on Linux
+        run: npx playwright test visual.spec.ts --update-snapshots
+
+      - name: Commit updated snapshots
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add tests/visual.spec.ts-snapshots/
+          git diff --staged --quiet || git commit -m "ci: regenerate visual snapshots on Linux for CI compatibility"
+          git push
